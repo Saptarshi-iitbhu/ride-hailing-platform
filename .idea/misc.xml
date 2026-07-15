@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/trip-service/pom.xml" />
+        <option value="$PROJECT_DIR$/driver-service/pom.xml" />
       </list>
     </option>
   </component>
