@@ -23,7 +23,7 @@ public class Driver {
     private String name;
 
     @Column(nullable = false, unique = true)
-    private String lincenseNumber;
+    private String licenseNumber;
 
     @Column(nullable = false)
     private String vehicleModel;
