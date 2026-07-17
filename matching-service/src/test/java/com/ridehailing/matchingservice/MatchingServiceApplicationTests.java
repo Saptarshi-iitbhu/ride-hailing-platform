@@ -1,10 +1,10 @@
-package com.ridehailing.driverservice;
+package com.ridehailing.matchingservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DriverServiceApplicationTests {
+class MatchingServiceApplicationTests {
 
     @Test
     void contextLoads() {
