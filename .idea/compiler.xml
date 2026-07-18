@@ -13,13 +13,14 @@
         <module name="trip-service" />
         <module name="driver-service" />
       </profile>
-      <profile name="Annotation profile for matching-service" enabled="true">
+      <profile name="Annotation profile for rider-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
+        <module name="rider-service" />
         <module name="matching-service" />
       </profile>
     </annotationProcessing>
@@ -28,6 +29,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="driver-service" options="-parameters" />
       <module name="matching-service" options="-parameters" />
+      <module name="rider-service" options="-parameters" />
       <module name="trip-service" options="-parameters" />
     </option>
   </component>
