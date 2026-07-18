@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class MatchingService {
 
-    private static final String GEO_KEY = "drivers:location";
-    private static final String STATUS_KEY_PREFIX = "driver:status";
+    private static final String GEO_KEY = "drivers:locations";
+    private static final String STATUS_KEY_PREFIX = "driver:status:";
 
     private final RedisTemplate<String,Object> redisTemplate;
     private final GeoOperations<String,Object> geoOperations;
