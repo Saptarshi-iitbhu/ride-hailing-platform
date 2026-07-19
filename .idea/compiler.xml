@@ -12,7 +12,7 @@
         </processorPath>
         <module name="driver-service" />
       </profile>
-      <profile name="Annotation profile for payment-service" enabled="true">
+      <profile name="Annotation profile for notification-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -22,6 +22,7 @@
         <module name="trip-service" />
         <module name="payment-service" />
         <module name="rider-service" />
+        <module name="notification-service" />
         <module name="matching-service" />
       </profile>
     </annotationProcessing>
@@ -30,6 +31,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="driver-service" options="-parameters" />
       <module name="matching-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="rider-service" options="-parameters" />
       <module name="trip-service" options="-parameters" />
