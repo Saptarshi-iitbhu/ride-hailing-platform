@@ -136,12 +136,12 @@ Once running, metrics are available via:
 
 ## 📌 Roadmap
 
-- [ ] Core service scaffolding (Spring Boot + Postgres)
-- [ ] Redis geospatial driver matching
-- [ ] Kafka event flow between services
-- [ ] Saga pattern (choreography-based) with compensating transactions
+- [x] Core service scaffolding (Spring Boot + Postgres)
+- [x] Redis geospatial driver matching
+- [x] Kafka event flow between services
+- [x] Saga pattern (choreography-based) with compensating transactions
+- [x] Docker Compose local environment
 - [ ] Testcontainers-based integration test suite
-- [ ] Docker Compose local environment
 - [ ] Kubernetes manifests (local via minikube/kind)
 - [ ] AWS EKS deployment
 - [ ] Prometheus + Grafana dashboards
