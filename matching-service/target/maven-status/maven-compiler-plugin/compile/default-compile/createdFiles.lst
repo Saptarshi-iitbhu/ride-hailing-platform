@@ -1,1 +1,10 @@
+com\ridehailing\matchingservice\service\MatchingService.class
+com\ridehailing\matchingservice\dto\DriverMatchedEvent$DriverMatchedEventBuilder.class
+com\ridehailing\matchingservice\dto\RideRequestedEvent$RideRequestedEventBuilder.class
+com\ridehailing\matchingservice\dto\RideRequestedEvent.class
+com\ridehailing\matchingservice\config\RedisGeoConfig.class
+com\ridehailing\matchingservice\kafka\MatchingEventListener.class
 com\ridehailing\matchingservice\MatchingServiceApplication.class
+com\ridehailing\matchingservice\kafka\KafkaTopics.class
+com\ridehailing\matchingservice\dto\DriverMatchedEvent.class
+com\ridehailing\matchingservice\kafka\MatchingEventProducer.class

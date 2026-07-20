@@ -66,6 +66,40 @@ services:
       timeout: 5s
       retries: 5
 
+  postgres-rider:
+    image: postgres:16-alpine
+    container_name: postgres-rider
+    environment:
+      POSTGRES_DB: rider_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-rider-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  postgres-payment:
+    image: postgres:16-alpine
+    container_name: postgres-payment
+    environment:
+      POSTGRES_DB: payment_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres-payment-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   trip-service:
     build:
       context: ./trip-service
@@ -79,6 +113,8 @@ services:
       - "8083:8083"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-trip:5432/trip_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin123
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
 
   driver-service:
@@ -96,9 +132,74 @@ services:
       - "8084:8084"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-driver:5432/driver_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin123
       SPRING_DATA_REDIS_HOST: redis
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+
+  matching-service:
+    build:
+      context: ./matching-service
+    container_name: matching-service
+    depends_on:
+      kafka:
+        condition: service_started
+      redis:
+        condition: service_started
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+
+  rider-service:
+    build:
+      context: ./rider-service
+    container_name: rider-service
+    depends_on:
+      postgres-rider:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    ports:
+      - "8086:8086"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-rider:5432/rider_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+
+  payment-service:
+    build:
+      context: ./payment-service
+    container_name: payment-service
+    depends_on:
+      postgres-payment:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-payment:5432/payment_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+
+  notification-service:
+    build:
+      context: ./notification-service
+    container_name: notification-service
+    depends_on:
+      kafka:
+        condition: service_started
+    ports:
+      - "8088:8088"
+    environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
 
 volumes:
   postgres-trip-data:
   postgres-driver-data:
+  postgres-rider-data:
+  postgres-payment-data:
