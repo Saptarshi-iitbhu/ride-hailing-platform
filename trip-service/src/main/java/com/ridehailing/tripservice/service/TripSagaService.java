@@ -16,15 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-/**
- * Core Saga coordinator for the trip lifecycle.
- * <p>
- * Happy path: DriverMatched -> TripCreated -> (Payment service authorizes) ->
- * PaymentAuthorized -> TripConfirmed.
- * <p>
- * Compensating path: PaymentFailed -> TripCancelled (driver-service listens on
- * trip-cancelled to release the driver back to the available pool).
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -65,11 +56,6 @@ public class TripSagaService {
         }, () -> log.warn("PaymentAuthorized received for unknown trip {}", event.tripId()));
     }
 
-    /**
-     * Compensating transaction: payment failed, so we roll the trip back
-     * and notify downstream services (driver-service, notification-service)
-     * so the driver becomes available again and the rider is informed.
-     */
     public void handlePaymentFailed(PaymentFailedEvent event) {
         tripRepository.findById(event.tripId()).ifPresentOrElse(trip -> {
             trip.setStatus(TripStatus.CANCELLED);
