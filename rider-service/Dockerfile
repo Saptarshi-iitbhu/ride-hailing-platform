@@ -6,7 +6,7 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn install package -DskipTests
 
-FROM eclipse-temurin:17-jre-alpin
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/rider-service-0.1.0.jar app.jar
 EXPOSE 8086
