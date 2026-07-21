@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Driver {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
 
     @Column(nullable = false)
@@ -49,7 +49,7 @@ public class Driver {
         updatedAt = Instant.now();
 
         if(driverStatus == null){
-            driverStatus = DriverStatus.OFFILNE;
+            driverStatus = DriverStatus.OFFLINE;
         }
 
         if(rating == null){

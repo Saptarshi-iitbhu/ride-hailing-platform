@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DriverEventListner {
 
-    private DriverService driverService;
+    private final DriverService driverService;
 
     @KafkaListener(topics = KafkaTopics.TRIP_CANCELLED, groupId = "driver-service")
     public void onTripCancelled(TripCancelledEvent tripCancelledEvent) {

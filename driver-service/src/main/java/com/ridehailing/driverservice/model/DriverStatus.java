@@ -1,7 +1,7 @@
 package com.ridehailing.driverservice.model;
 
 public enum DriverStatus {
-    OFFILNE,
+    OFFLINE,
     AVAILABLE,
     BUSY
 }
